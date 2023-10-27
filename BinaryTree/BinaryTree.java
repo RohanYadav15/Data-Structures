@@ -78,25 +78,26 @@ public class BinaryTree {
         System.out.print(root.element);
     }
 
-    public void preOrderIter(){
+    public void preOrderIter(Node root){
+        if(root == null){return;}
         Stack<Node> stack = new Stack<Node>();
+        stack.push(root);
 
-        Node cur = root;
-        while(cur != null || !stack.isEmpty()){
-            if(cur == null){
-                cur = stack.pop();
-            }
-            System.out.print(cur.element);
-            if(cur.right != null){stack.push(cur.right);}
-            cur = cur.left;
+        while(!stack.isEmpty()){
+            Node node = stack.pop();
+            System.out.print(node.element);
+            if(node.right != null) stack.push(node.right);
+            if(node.left != null) stack.push(node.left);
         }
+        System.out.println();
+
     }
 
     public void inOrderIter(Node p){
         if(p == null) return;
         Stack<Node> stack = new Stack<Node>();
-        stack.push(p);
         Node cur = p;
+
         while(!stack.isEmpty() || cur != null){
             while(cur != null){
                 stack.push(cur);
@@ -106,30 +107,30 @@ public class BinaryTree {
             System.out.print(cur.element);
             cur = cur.right;
         }
+        System.out.println();
     }
+
+    public void postOrderIter(Node root){
+        Stack<Node> st1 = new Stack();
+        Stack<Node> st2 = new Stack();
+
+    }
+
+
 //     public boolean remove(){}
     public static void main(String[] args){
     BinaryTree tr = new BinaryTree();
-    Node root = new Node(2);
+    Node root = new Node(1);
     tr.addRoot(root);
 
-    Node left = tr.addLeft(root, 1);
-    Node right = tr.addRight(root, 6);
-    tr.addLeft(left, 3);
-    tr.addRight(left, 4);
-    tr.addLeft(right, 5);
+    Node left = tr.addLeft(root, 2);
+    Node right = tr.addRight(root, 3);
+
+    tr.addLeft(left, 4);
+    tr.addRight(left, 5);
+    tr.addLeft(right, 6);
     tr.addRight(right, 7);
-
-    tr.inOrderRec(root);
-    System.out.println();
-
-    // tr.preOrderIter();
-    // System.out.println();
-
-    // tr.postOrderRec(root);
-    // System.out.println();
-
-
-
+    
+    tr.inOrderIter(root);
 }
 }
