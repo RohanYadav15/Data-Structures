@@ -175,11 +175,36 @@ public class SinglyLinkedList{
         size -= 2;
         }
 
+
+        public void deleteMiddleNode(){
+            if(head == null || size < 2) return;
+
+            Node cur = head;
+            int curPosition = 1;
+            int midIndex = size / 2;
+            while(curPosition < midIndex){
+                cur = cur.next;
+                curPosition++;
+                size--;
+            }
+            cur.next = cur.next.next;
+            traverse();
+            if(size % 2 == 0){
+                cur.next = cur.next.next;
+                size--;
+            }
+            
+        }
+
 public static void main(String[] args){
    SinglyLinkedList ssl = new SinglyLinkedList(); 
    ssl.insertTail(1);
+   ssl.insertTail(2);
+//    ssl.insertTail(3);
+//    ssl.insertTail(4);
+//    ssl.insertTail(5);
    ssl.traverse();
-   ssl.deleteTwoNodes(1);
+   ssl.deleteMiddleNode();
    ssl.traverse();
 }
 }
